@@ -1,7 +1,7 @@
 /**
  *
  */
-function displayMessage(args) {
-  process.stdout.write(args + '\n');
+function displayMessage(msg) {
+  console.log(msg);
 }
-module.exports = displayMessage
+module.exports = displayMessage;
