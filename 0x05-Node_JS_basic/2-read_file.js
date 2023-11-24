@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function countStudents (path) {
+function countStudents(path) {
   // data format: FIRSTNAME, LASTNAME, AGE, FIELD
   fs.readFile(path, 'utf-8', (error, data) => {
     if (error) {
@@ -18,33 +18,33 @@ function countStudents (path) {
     });
     // first item is label for columns, and the last is a null character. exclude
     results = results.slice(1, -1);
-    console.log('Number of students: ' + results.length);
+    console.log(`Number of students: ${results.length}`);
 
     // create list of objects to represent each field, and the students
     // in that field.
     const fields = [];
-    for (let i = 0; i < results.length; i++) {
+    for (let i = 0; i < results.length; i += 1) {
       const fieldName = results[i][results[i].length - 1];
       // check if field already added to the fields list
-      const findField = fields.find(field => field.fieldName === fieldName);
+      const findField = fields.find((field) => field.fieldName === fieldName);
 
       if (findField) {
-        findField.count++;
+        findField.count += 1;
         findField.firstnames.push(results[i][0]);
       } else {
         fields.push({
-          fieldName: fieldName,
+          fieldName,
           count: 1,
-          firstnames: [results[i][0]]
+          firstnames: [results[i][0]],
         });
       }
     }
 
     for (const itm in fields) {
-      console.log('Number of students in ' +
-                  fields[itm].fieldName + ': ' +
-                  fields[itm].count +
-                  '. List: ' + fields[itm].firstnames.join(', '));
+      if (Object.prototype.hasOwnProperty.call(fields, itm)) {
+        console.log(`Number of students in ${fields[itm].fieldName}: ${fields[itm].count}.`
+         + `List: ${fields[itm].firstnames.join(', ')}`);
+      }
     }
   });
 }
