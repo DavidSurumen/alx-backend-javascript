@@ -26,14 +26,14 @@ const countStudents = (path) => new Promise((resolve, reject) => {
       const fieldCounts = {};
       const fieldStudents = {};
 
-      // eslint-disable no-unused-vars
+      /* eslint-disable no-unused-vars */
       results.forEach((student) => {
         const [firstname, lastname, age, field] = student;
         fieldCounts[field] = (fieldCounts[field] || 0) + 1;
         fieldStudents[field] = fieldStudents[field] || [];
         fieldStudents[field].push(firstname);
       });
-      // eslint-enable no-usued-vars
+      /* eslint-enable no-unused-vars */
 
       Object.keys(fieldCounts).forEach((field) => {
         const count = fieldCounts[field];
@@ -86,10 +86,6 @@ const SERVER_ROUTE = [
 
 // server event listener
 app.on('request', (req, res) => {
-  // get the URL path from the request
-  const url = new URL(req.url, `http://${req.headers.host}`);
-  const path = url.pathname;
-
   // respond based on the URL path
   for (const routeHandler of SERVER_ROUTE) {
     if (routeHandler.route === req.url) {
