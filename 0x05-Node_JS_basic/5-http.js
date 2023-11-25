@@ -62,11 +62,11 @@ const SERVER_ROUTE = [
   {
     route: '/students',
     handler(_, res) {
+      const resParts = ['This is the list of our students'];
+
       countStudents(DB_FILE)
         .then((report) => {
-          const resParts = ['This is the list of our students'];
           resParts.push(report);
-
           const resText = resParts.join('\n');
 
           res.setHeader('Content-Type', 'text/plain');
@@ -75,10 +75,13 @@ const SERVER_ROUTE = [
           res.write(Buffer.from(resText));
         })
         .catch((error) => {
+          resParts.push(error.message);
+          const resText = resParts.join('\n');
+
           res.setHeader('Content-Type', 'text/plain');
-          res.setHeader('Content-Length', error.message.length);
-          res.statusCode = 404;
-          res.write(Buffer.from(error.message));
+          res.setHeader('Content-Length', resText.length);
+          res.statusCode = 200;
+          res.write(Buffer.from(resText));
         });
     },
   },
