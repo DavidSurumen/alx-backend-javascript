@@ -19,7 +19,7 @@ class StudentsController {
         const resParts = ['This is the list of our students'];
 
         // order list of strings by alphabetic order, case insensitive
-        // using a comparison function for ordering
+        // using a comparison function
         const compare = (a, b) => {
           if (a[0].toLowerCase() < b[0].toLowerCase()) {
             return -1;
