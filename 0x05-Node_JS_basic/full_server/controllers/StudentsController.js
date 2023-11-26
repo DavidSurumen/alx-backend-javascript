@@ -1,6 +1,5 @@
 import readDatabase from '../utils';
 
-const path = process.argv.length > 2 ? process.argv[2] : '';
 const VALID_MAJORS = ['CS', 'SWE'];
 
 /**
@@ -9,11 +8,12 @@ const VALID_MAJORS = ['CS', 'SWE'];
  * @author David Surumen <https://github.com/DavidSurumen
  */
 class StudentsController {
-
   /**
    * Retrieves all students
    */
   static getAllStudents(request, response) {
+    const path = process.argv.length > 2 ? process.argv[2] : '';
+
     readDatabase(path)
       .then((fieldStudents) => {
         const resParts = ['This is the list of our students'];
@@ -33,7 +33,7 @@ class StudentsController {
         for (const [field, students] of Object.entries(fieldStudents).sort(compare)) {
           resParts.push([
             `Number of students in ${field}: ${students.length}.`,
-            `List: `,
+            'List:',
             students.join(', '),
           ].join(' '));
         }
@@ -50,6 +50,8 @@ class StudentsController {
    * Retrieves all students by major
    */
   static getAllStudentsByMajor(request, response) {
+    const path = process.argv.length > 2 ? process.argv[2] : '';
+
     const { major } = request.params;
 
     if (!VALID_MAJORS.includes(major)) {
