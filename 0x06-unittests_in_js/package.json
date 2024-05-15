@@ -4,7 +4,8 @@
 	},
 	"devDependencies": {
 		"chai": "^4.4.1",
-		"mocha": "*"
+		"mocha": "*",
+		"sinon": "^16.1.3"
 	},
 	"//": "mocha is your preference, but you can use any test runner you like"
 }
